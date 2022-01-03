@@ -1,0 +1,56 @@
+--SELECT FROM WORLD
+
+--Per capita GDP
+select name,gdp/population as GDP
+from world
+WHERE population >= 200000000;
+
+--South America In millions
+
+select name ,population/1000000 as P
+from world
+where continent='South America';
+
+--France, Germany, Italy
+select name,population
+from world
+where name in ('France', 'Germany', 'Italy');
+
+--United
+select name
+from world
+where name like '%United%';
+
+--Two ways to be big
+select name,population,area
+from world
+where population>250000000 or area>3000000;
+
+--One or the other (but not both)
+select name,population,area
+from world
+where population>250000000 xor area>3000000;
+
+--Rounding
+select name,round(population/1000000,2) ,round(gdp/1000000000,2)
+from world
+where  continent='South America';
+
+--Trillion dollar economies
+select name, ROUND(gdp/population,-3) from world
+where gdp > 1000000000000;
+
+--Name and capital have the same length
+SELECT name, LENGTH(name), continent, LENGTH(continent), capital, LENGTH(capital)
+FROM world
+WHERE name LIKE 'G%';
+
+--Matching name and capital
+SELECT name, LEFT(name,1), capital
+FROM world;
+
+--All the vowels
+SELECT name
+FROM world
+WHERE name LIKE 'B%'
+  AND name NOT LIKE '%a%'
